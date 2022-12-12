@@ -3,6 +3,7 @@
 let runningTotal = 0;
 let buffer = "0";
 let previousOperator = null;
+let ope = "out";
 
 const screen = document.querySelector(".screen");
 
@@ -14,29 +15,45 @@ function buttonClick(value) {
     // this is a number
     handelNumber(value);
   }
-  screen.innerText = buffer;
+  if (ope === "out") {
+    screen.innerText = buffer;
+  }
+  console.log(ope);
 }
 
 function handelSymbol(symbol) {
   switch (symbol) {
     case "C":
+      if (ope === "in") {
+        screen.innerText = "0";
+      }
       buffer = "0";
       runningTotal = 0;
       previousOperator = null;
       break;
     case "+":
+      ope = "in";
       handelMath(symbol);
       break;
     case "−":
+      ope = "in";
       handelMath(symbol);
       break;
     case "×":
+      ope = "in";
       handelMath(symbol);
       break;
     case "÷":
-      handelMath(Symbol);
+      ope = "in";
+      handelMath(symbol);
       break;
     case "=":
+      if (ope === "in") {
+        screen.innerText = "Error";
+        buffer = "0";
+        previousOperator = null;
+        runningTotal = 0;
+      }
       if (previousOperator === null) {
         return;
       }
@@ -94,6 +111,7 @@ function flushOperation(intBuffer) {
 }
 
 function handelNumber(numberString) {
+  ope = "out";
   if (buffer === "0") {
     buffer = numberString;
   } else {
