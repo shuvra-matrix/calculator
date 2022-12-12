@@ -45,6 +45,19 @@ function handelSymbol(symbol) {
       buffer = runningTotal;
       runningTotal = 0;
       break;
+    case "←":
+      if (buffer === "0") {
+        return;
+      } else if (buffer.length === 0) {
+        buffer = "0";
+      } else {
+        buffer = buffer.slice(-buffer.length, -1);
+        if (runningTotal === 0 && buffer.length === 0) {
+          buffer = "0";
+        }
+      }
+      screen.innerText = buffer;
+      break;
   }
 }
 
