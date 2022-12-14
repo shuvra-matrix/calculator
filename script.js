@@ -9,10 +9,8 @@ const screen = document.querySelector(".screen");
 
 function buttonClick(value) {
   if (isNaN(value)) {
-    // this is not a number
     handelSymbol(value);
   } else {
-    // this is a number
     handelNumber(value);
   }
   if (ope === "out") {
